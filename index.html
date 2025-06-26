@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Flappy Nose Bird</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="hud">
+      <h1> Flappy Nose</h1>
+      <p id="score">Score: 0</p>
+      <p id="highScore">High Score: 0</p>
+      <div class="buttons">
+        <button onclick="startGame()">Start</button>
+        <button onclick="pauseGame()">Pause</button>
+        <button onclick="restartGame()">Restart</button>
+      </div>
+    </div>
+
+    <div class="game-box">
+      <video id="webcam" autoplay muted playsinline></video>
+      <canvas id="overlay"></canvas>
+    </div>
+
+    <div id="gameOverOverlay" class="overlay-box">
+      <h2>Game Over</h2>
+      <p>Your Score: <span id="finalScore">0</span></p>
+      <button onclick="restartGame()">Play Again</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.20.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/facemesh@0.0.4"></script>
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

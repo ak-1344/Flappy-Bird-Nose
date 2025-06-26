@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #111;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 900px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.game-box {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  border: 6px solid #ffffff44;
+  border-radius: 16px;
+  background-image: url('./assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+video,
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 600px;
+  transform: scaleX(-1);
+  z-index: 0;
+}
+
+canvas {
+  z-index: 2;
+}
+
+.hud {
+  margin-bottom: 10px;
+}
+
+.buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.overlay-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #000000cc;
+  padding: 30px;
+  border-radius: 12px;
+  display: none;
+  z-index: 5;
+  color: white;
+}
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px;
+  height: 600px;
+  transform: scaleX(-1);
+  z-index: 0;
+  opacity: 0.35; /* 👈 Adds 35% opacity (adjust as needed) */
+}
