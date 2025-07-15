@@ -1,4 +1,4 @@
-import { updateGame, resetGame, pauseGame, startGame, loadHighScore } from "./game.js";
+import { updateGame, resetGame, pauseGame, startGame, loadHighScore } from "./game.js"; 
 
 const video = document.getElementById("webcam");
 const canvas = document.getElementById("overlay");
@@ -6,7 +6,6 @@ const ctx = canvas.getContext("2d");
 
 canvas.width = 800;
 canvas.height = 600;
-
 let currentNoseY = canvas.height / 2;
 let model;
 

@@ -12,6 +12,9 @@ let gameStarted = false;
 const birdImg = new Image();
 birdImg.src = './assets/bird.png';
 
+const pipeImg = new Image();
+pipeImg.src = './assets/pipe-top.png';
+
 const pointSound = new Audio('./assets/point.mp3');
 const hitSound = new Audio('./assets/hit.mp3');
 
@@ -24,7 +27,7 @@ function createPipe() {
   pipes.push({
     x: CONFIG.canvasWidth,
     gapY,
-    passed: false, // ✅ flag to track if bird passed this pipe
+    passed: false,
   });
 }
 
@@ -37,8 +40,7 @@ function checkCollision() {
     if (inX && (inTop || inBottom)) return true;
   }
 
-  if (birdY < 0 || birdY > CONFIG.canvasHeight) return true;
-  return false;
+  return birdY < 0 || birdY > CONFIG.canvasHeight;
 }
 
 function updateGame(noseY, ctx) {
@@ -63,9 +65,27 @@ function updateGame(noseY, ctx) {
   ctx.clearRect(0, 0, CONFIG.canvasWidth, CONFIG.canvasHeight);
 
   for (let pipe of pipes) {
-    ctx.fillStyle = "#228B22";
-    ctx.fillRect(pipe.x, 0, CONFIG.pipeWidth, pipe.gapY);
-    ctx.fillRect(pipe.x, pipe.gapY + CONFIG.pipeGap, CONFIG.pipeWidth, CONFIG.canvasHeight);
+    // Top pipe (normal)
+    ctx.drawImage(
+      pipeImg,
+      pipe.x,
+      pipe.gapY - pipeImg.height,
+      CONFIG.pipeWidth,
+      pipeImg.height
+    );
+
+    // Bottom pipe (flipped vertically)
+    ctx.save();
+    ctx.translate(pipe.x, pipe.gapY + CONFIG.pipeGap + pipeImg.height);
+    ctx.scale(1, -1);
+    ctx.drawImage(
+      pipeImg,
+      0,
+      0,
+      CONFIG.pipeWidth,
+      pipeImg.height
+    );
+    ctx.restore();
 
     // ✅ Score logic (only once per pipe)
     if (!pipe.passed && pipe.x + CONFIG.pipeWidth < 100) {
@@ -75,12 +95,16 @@ function updateGame(noseY, ctx) {
     }
   }
 
+  // Draw the bird
   ctx.drawImage(birdImg, 80, birdY - 20, 40, 40);
 
+  // Score display
   ctx.fillStyle = "white";
   ctx.font = "24px Arial";
   ctx.fillText("Score: " + score, 10, 30);
+  ctx.fillText("High Score: " + highScore, 10, 60);
 
+  // Collision check
   if (checkCollision()) {
     gameOver = true;
     hitSound.play();
@@ -93,9 +117,6 @@ function updateGame(noseY, ctx) {
     document.getElementById("finalScore").innerText = score;
     document.getElementById("gameOverOverlay").style.display = "block";
   }
-
-  document.getElementById("score").innerText = "Score: " + score;
-  document.getElementById("highScore").innerText = "High Score: " + highScore;
 }
 
 function resetGame() {
