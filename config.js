@@ -1,13 +1,13 @@
 export const CONFIG = {
   canvasWidth: 800,
   canvasHeight: 600,
-  gravity: 0.6,
+  gravity: 1,
   pipeSpeed: 2,
   pipeGap: 220,
   minPipeGap: 120,
   pipeFrequency: 300,
   pipeWidth: 80,
-  speedIncreaseRate: 0.002,
+  speedIncreaseRate: 0.02,
   gapDecreaseRate: 0.05,
 };
 
